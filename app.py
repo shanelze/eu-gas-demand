@@ -223,7 +223,7 @@ with tab_insights:
                f"**2. XGBoost beat the naive 'assume no surprise' baseline "
                 f"in {wins} of {total_folds} folds.** Reported honestly: "
                 f"once trend, seasonality, and weather are removed, there "
-                f"isn't much predictable structure left in the residual."
+                f"isn't much predictable structure left in the residual.")
 
     # Insight 3: top SHAP drivers
     if {"feature", "mean_abs_shap"}.issubset(shap_importance.columns):
