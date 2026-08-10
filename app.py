@@ -220,10 +220,8 @@ with tab_insights:
             wins = (pivot[xgb_col[0]] < pivot[seasonal_col[0]]).sum()
             total_folds = len(pivot)
             st.markdown(
-                f"**2. XGBoost beat the naive 'assume no surprise' baseline "
-                f"in {wins} of {total_folds} folds.**"
-                f"once trend, seasonality, and weather are removed, there "
-                f"isn't much predictable structure left in the residual. The residual may genuinely be close to noise. I.e., Once you've already removed trend, annual seasonality, and same-day/lagged weather, what's left over might just be things this dataset can't see — a specific factory running an extra shift, a maintenance outage, a regional cold snap the national average temperature smooths out, day-ahead gas pricing shifting industrial consumption"
+                f"2. XGBoost does not beat the naive 'assume no surprise' baseline'"
+                f"Once you've already removed trend, annual seasonality, and same-day/lagged weather, what's left over might just be things this dataset can't see — a specific factory running an extra shift, a maintenance outage, a regional cold snap the national average temperature smooths out, day-ahead gas pricing shifting industrial consumption"
             )
 
     # Insight 3: top SHAP drivers
