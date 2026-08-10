@@ -192,11 +192,13 @@ with tab_insights:
     st.subheader("Key insights")
 
     st.markdown(
-        "**0. We predict the seasonal-trend decomposition (residual), not raw demand. The rationale is the calendar alone "
-        "already explains most of demand (e.g., cold in January thus higher demand, warm in July thus lower demand). "
-        "Predicting the leftover residual instead anwers the question: "
-        "what's *left* to explain once the obvious seasonal pattern is "
-        "removed?."
+        "0. We predict the residual from the seasonal-trend decomposition, not "
+"raw demand.** The rationale: the calendar alone already explains most of "
+"demand (e.g., cold in January means higher demand, warm in July means "
+"lower demand). Predicting the leftover residual instead answers the "
+"question: what's *left* to explain once the obvious seasonal pattern is "
+"removed?"
+       
     )
 
     # Insight 1: demand definition
@@ -221,7 +223,7 @@ with tab_insights:
                 f"**2. XGBoost beat the naive 'assume no surprise' baseline "
                 f"in {wins} of {total_folds} folds.**"
                 f"once trend, seasonality, and weather are removed, there "
-                f"isn't much predictable structure left in the residual."
+                f"isn't much predictable structure left in the residual. The residual may genuinely be close to noise. I.e., Once you've already removed trend, annual seasonality, and same-day/lagged weather, what's left over might just be things this dataset can't see — a specific factory running an extra shift, a maintenance outage, a regional cold snap the national average temperature smooths out, day-ahead gas pricing shifting industrial consumption"
             )
 
     # Insight 3: top SHAP drivers
@@ -348,7 +350,7 @@ with tab_forecast:
     recent_actual = merged[merged["date"] >= merged["date"].max() - pd.Timedelta(days=180)]
     fig.add_trace(go.Scatter(
         x=recent_actual["date"], y=recent_actual["demand_gwh"],
-        mode="lines", name="Recent actual", line=dict(width=1, color="black"),
+        mode="lines", name="Recent actual", line=dict(width=1, color="#2ea043"),
     ))
     fig.update_layout(height=500, yaxis_title="GWh/day", hovermode="x unified")
     st.plotly_chart(fig, use_container_width=True)
