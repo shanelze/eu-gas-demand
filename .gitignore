@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# Raw fetch output -- large, and fully reproducible by re-running
+# src/fetch_entsog.py. At 177MB it's also over GitHub's 100MB hard limit.
+data/entsog_germany.csv
+
+# OS / editor cruft
+.DS_Store
+__pycache__/
+*.pyc
+.vscode/
+
+# Python env, if you ever create one inside the project folder
+venv/
+.venv/
