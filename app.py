@@ -1,9 +1,6 @@
 # app.py -- Streamlit dashboard for the German gas demand project.
 #
-# Lives at the project ROOT (not src/) -- data paths below are relative to
-# the repo root, and Streamlit Community Cloud expects the entry-point file
-# and requirements.txt at the root by default.
-#
+
 #   pip install streamlit plotly
 #   streamlit run app.py
 #
@@ -195,12 +192,11 @@ with tab_insights:
     st.subheader("Key insights")
 
     st.markdown(
-        "**0. Why predict the surprise, not raw demand?** The calendar alone "
-        "already explains most of demand (cold in January, warm in July). "
-        "Predicting the leftover residual instead asks a sharper question: "
+        "**0. We predict the seasonal-trend decomposition (residual), not raw demand. The rationale is the calendar alone "
+        "already explains most of demand (e.g., cold in January thus higher demand, warm in July thus lower demand). "
+        "Predicting the leftover residual instead anwers the question: "
         "what's *left* to explain once the obvious seasonal pattern is "
-        "removed? Also fixed a bug where a raw-demand forecast anchored on "
-        "a low starting point and wrongly declined into winter (point 4)."
+        "removed?."
     )
 
     # Insight 1: demand definition
@@ -223,7 +219,7 @@ with tab_insights:
             total_folds = len(pivot)
             st.markdown(
                 f"**2. XGBoost beat the naive 'assume no surprise' baseline "
-                f"in {wins} of {total_folds} folds.** Reported honestly: "
+                f"in {wins} of {total_folds} folds.**"
                 f"once trend, seasonality, and weather are removed, there "
                 f"isn't much predictable structure left in the residual."
             )
