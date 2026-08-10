@@ -192,14 +192,14 @@ with tab_insights:
     st.subheader("Key insights")
 
     st.markdown(
-        "0. We predict the residual from the seasonal-trend decomposition, not "
-"raw demand.** The rationale: the calendar alone already explains most of "
-"demand (e.g., cold in January means higher demand, warm in July means "
-"lower demand). Predicting the leftover residual instead answers the "
-"question: what's *left* to explain once the obvious seasonal pattern is "
-"removed?"
-       
+        "**0. We predict the residual from the seasonal-trend decomposition, "
+        "not raw demand.** The rationale: the calendar alone already "
+        "explains most of demand (e.g., cold in January means higher "
+        "demand, warm in July means lower demand). Predicting the leftover "
+        "residual instead answers the question: what's *left* to explain "
+        "once the obvious seasonal pattern is removed?"
     )
+
 
     # Insight 1: demand definition
     consumer_share = (merged["demand_gwh"].mean() / merged["total_system_offtake_gwh"].mean()) * 100
@@ -220,9 +220,10 @@ with tab_insights:
             wins = (pivot[xgb_col[0]] < pivot[seasonal_col[0]]).sum()
             total_folds = len(pivot)
             st.markdown(
-                f"2. XGBoost does not beat the naive 'assume no surprise' baseline'"
-                f"Once you've already removed trend, annual seasonality, and same-day/lagged weather, what's left over might just be things this dataset can't see — a specific factory running an extra shift, a maintenance outage, a regional cold snap the national average temperature smooths out, day-ahead gas pricing shifting industrial consumption"
-            )
+               f"**2. XGBoost beat the naive 'assume no surprise' baseline "
+                f"in {wins} of {total_folds} folds.** Reported honestly: "
+                f"once trend, seasonality, and weather are removed, there "
+                f"isn't much predictable structure left in the residual."
 
     # Insight 3: top SHAP drivers
     if {"feature", "mean_abs_shap"}.issubset(shap_importance.columns):
