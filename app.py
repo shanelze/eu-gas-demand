@@ -192,7 +192,7 @@ with tab_insights:
     st.subheader("Key insights")
 
     st.markdown(
-        "**0. The model predicts the residual from the seasonal-trend decomposition, "
+        "**0. More useful for the model to predict the residual from the seasonal-trend decomposition, "
         "instead of raw demand.** The rationale: the calendar alone already "
         "explains most of demand (e.g., cold in January means higher "
         "demand, warm in July means lower demand). Predicting the leftover "
@@ -220,10 +220,19 @@ with tab_insights:
             wins = (pivot[xgb_col[0]] < pivot[seasonal_col[0]]).sum()
             total_folds = len(pivot)
             st.markdown(
-               f"**2. XGBoost beat the naive 'assume no surprise' baseline "
-                f"in {wins} of {total_folds} folds.** Reported honestly: "
-                f"once trend, seasonality, and weather are removed, there "
-                f"isn't much predictable structure left in the residual.")
+                f"**2. XGBoost beat the naive 'assume no surprise' baseline "
+                f"in {wins} of {total_folds} folds.** Reported honestly, "
+                f"rather than hidden. This could mean there's genuinely "
+                f"little predictable structure left once trend, "
+                f"seasonality, and weather are removed -- or it could "
+                f"reflect limitations of this specific setup: demand is "
+                f"built from only 12 reporting points nationally (thin and "
+                f"noise-prone), the feature set may be missing relevant "
+                f"drivers (industrial activity, gas prices), or the model "
+                f"may be overfitting a small dataset (~1,800 daily rows). "
+                f"See Next Steps for what would help distinguish between "
+                f"these."
+            )
 
     # Insight 3: top SHAP drivers
     if {"feature", "mean_abs_shap"}.issubset(shap_importance.columns):
@@ -235,7 +244,7 @@ with tab_insights:
         )
 
     st.markdown(
-        "**4. The forecast couldn't be allowed to feed on its own output.** "
+        "**4. The forecast shouldn't be allowed to feed on its own output.** "
         "An earlier version recursively re-predicted demand day-by-day, "
         "compounding small biases into a forecast that declined into "
         "winter. Fixed by predicting the residual and, for simulation, "
