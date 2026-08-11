@@ -192,12 +192,12 @@ with tab_insights:
     st.subheader("Key insights")
 
     st.markdown(
-        "**0. We predict the residual from the seasonal-trend decomposition, "
-        "not raw demand.** The rationale: the calendar alone already "
+        "**0. The model predicts the residual from the seasonal-trend decomposition, "
+        "instead of raw demand.** The rationale: the calendar alone already "
         "explains most of demand (e.g., cold in January means higher "
         "demand, warm in July means lower demand). Predicting the leftover "
         "residual instead answers the question: what's *left* to explain "
-        "once the obvious seasonal pattern is removed?"
+        "once the obvious seasonal pattern is removed"
     )
 
 
