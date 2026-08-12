@@ -192,7 +192,7 @@ with tab_insights:
     st.subheader("Key insights")
 
     st.markdown(
-        "**0. More useful for the model to predict the residual from the seasonal-trend decomposition, "
+        "**0. It is more useful for the model to predict the residual from the seasonal-trend decomposition, "
         "instead of raw demand.** The rationale: the calendar alone already "
         "explains most of demand (e.g., cold in January means higher "
         "demand, warm in July means lower demand). Predicting the leftover "
