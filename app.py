@@ -221,10 +221,9 @@ with tab_insights:
             total_folds = len(pivot)
             st.markdown(
                 f"**2. XGBoost beat the naive 'assume no surprise' baseline "
-                f"in {wins} of {total_folds} folds.** Reported honestly, "
-                f"rather than hidden. This could mean there's genuinely "
+                f"in {wins} of {total_folds} folds.** This could mean there's genuinely "
                 f"little predictable structure left once trend, "
-                f"seasonality, and weather are removed -- or it could "
+                f"seasonality, and weather are removed - or it could "
                 f"reflect limitations of this specific setup: demand is "
                 f"built from only 12 reporting points nationally (thin and "
                 f"noise-prone), the feature set may be missing relevant "
